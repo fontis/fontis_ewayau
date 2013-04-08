@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Fontis eWAY Australia Extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you are unable to obtain it through the world-wide-web, please send
+ * an email to license@magentocommerce.com so you can be sent a copy.
+ *
+ * @category   Fontis
+ * @package    Fontis_EwayAu
+ * @author     Chris Norton
+ * @copyright  Copyright (c) 2010 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Fontis_EwayAu>
+            <version>1.2.5</version>
+        </Fontis_EwayAu>
+    </modules>
+    <global>
+        <models>
+            <ewayau>
+                <class>Fontis_EwayAu_Model</class>
+            </ewayau>
+        </models>
+        <helpers>
+            <ewayau>
+                <class>Fontis_EwayAu_Helper</class>
+            </ewayau>
+        </helpers>
+        <resources>
+            <ewayau_setup>
+                <setup>
+                    <module>Fontis_EwayAu</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ewayau_setup>
+            <ewayau_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ewayau_write>
+            <ewayau_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ewayau_read>
+        </resources>
+        <blocks>
+            <ewayau><class>Fontis_EwayAu_Block</class></ewayau>
+        </blocks>
+        <payment>
+            <cc>
+                <types>
+                    <JCB>
+                        <code>JCB</code>
+                        <name>JCB</name>
+                        <order>50</order>
+                    </JCB>
+                    <DICL>
+                        <code>DICL</code>
+                        <name>Diners Club</name>
+                        <order>60</order>
+                    </DICL>
+                </types>
+            </cc>
+        </payment>
+    </global>
+    <frontend>
+        <secure_url>
+            <ewayau_shared>/ewayau/shared</ewayau_shared>
+        </secure_url>
+        <routers>
+            <ewayau>
+                <use>standard</use>
+                <args>
+                    <module>Fontis_EwayAu</module>
+                    <frontName>ewayau</frontName>
+                </args>
+            </ewayau>
+        </routers>
+        <translate>
+            <modules>
+                <Fontis_EwayAu>
+                    <files>
+                        <default>Fontis_EwayAu.csv</default>
+                    </files>
+                </Fontis_EwayAu>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <ewayau>
+                    <file>fontis_ewayau.xml</file>
+                </ewayau>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Fontis_EwayAu>
+                    <files>
+                        <default>Fontis_EwayAu.csv</default>
+                    </files>
+                </Fontis_EwayAu>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <payment>
+            <ewayau_direct>
+                <customer_id backend_model="adminhtml/system_config_backend_encrypted"/>
+                <refund_password backend_model="adminhtml/system_config_backend_encrypted"/>
+                <currency>AUD</currency>
+                <payment_action>authorize_capture</payment_action>
+                <model>ewayau/direct</model>
+                <title>eWAY Direct</title>
+                <order_status>processing</order_status>
+                <cctypes>AE,VI,MC,DICL,JCB</cctypes>
+                <allowspecific>0</allowspecific>
+                <test_gateway>0</test_gateway>
+            </ewayau_direct>
+            <ewayau_shared>
+                <customer_id backend_model="adminhtml/system_config_backend_encrypted"/>
+                <currency>AUD</currency>
+                <model>ewayau/shared</model>
+                <title>eWAY Shared</title>
+                <order_status>processing</order_status>
+                <allowspecific>0</allowspecific>
+            </ewayau_shared>
+            <ewayau_secure>
+                <customer_id backend_model="adminhtml/system_config_backend_encrypted"/>
+                <currency>AUD</currency>
+                <model>ewayau/secure</model>
+                <title>eWAY 3D-Secure</title>
+                <order_status>processing</order_status>
+                <allowspecific>0</allowspecific>
+            </ewayau_secure>
+        </payment>
+    </default>
+</config>
