@@ -374,26 +374,4 @@ class Fontis_EwayAu_Model_Direct extends Mage_Payment_Model_Method_Cc
 
         return $newResArr;
     }
-    
-    /**
-     * Check if invoice email can be sent, and send it
-     * 
-     * @param Mage_Sales_Model_Order_Invoice $invoice
-     * @param Mage_Sales_Model_Order_Payment $payment
-     * @return Fontis_EwayAu_Model_Direct
-     */
-    public function processInvoice($invoice, $payment)
-    {
-        parent::processInvoice($invoice, $payment);
-        try {
-            $storeId = $invoice->getOrder()->getStoreId();
-            if (Mage::helper('sales')->canSendNewInvoiceEmail($storeId)) {
-                $invoice->save();
-                $invoice->sendEmail();
-            }
-        } catch (Exception $e) {
-            mage::logException($e);
-        }    
-        return $this;
-    }
 }

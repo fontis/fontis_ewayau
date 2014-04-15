@@ -74,6 +74,17 @@
                 </types>
             </cc>
         </payment>
+        <events>
+            <checkout_submit_all_after>
+                <observers>
+                    <ewayau_checkout_submit_all_after>
+                        <type>singleton</type>
+                        <class>ewayau/observer</class>
+                        <method>checkout_submit_all_after</method>
+                    </ewayau_checkout_submit_all_after>
+                </observers>
+            </checkout_submit_all_after>
+        </events>
     </global>
     <frontend>
         <secure_url>
