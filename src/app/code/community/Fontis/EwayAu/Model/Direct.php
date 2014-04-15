@@ -43,7 +43,7 @@ class Fontis_EwayAu_Model_Direct extends Mage_Payment_Model_Method_Cc
      */
     public function getUseccv()
     {
-        return Mage::getStoreConfig('payment/ewayau_direct/useccv');
+        return $this->getConfigData('useccv');
     }
 
     /**
@@ -53,7 +53,7 @@ class Fontis_EwayAu_Model_Direct extends Mage_Payment_Model_Method_Cc
      */
     public function getApiGatewayUrl()
     {
-        if(Mage::getStoreConfig('payment/ewayau_direct/test_gateway')) {
+        if($this->getConfigData('test_gateway')) {
             return 'https://www.eway.com.au/gateway/xmltest/testpage.asp';
         } else {
             if($this->getUseccv()) {
@@ -71,7 +71,7 @@ class Fontis_EwayAu_Model_Direct extends Mage_Payment_Model_Method_Cc
      */
     public function getCustomerId()
     {
-        return Mage::getStoreConfig('payment/ewayau_direct/customer_id');
+        return $this->getConfigData('customer_id');
     }
 
     /**
@@ -81,12 +81,12 @@ class Fontis_EwayAu_Model_Direct extends Mage_Payment_Model_Method_Cc
      */
     public function getAcceptedCurrency()
     {
-        return Mage::getStoreConfig('payment/' . $this->getCode() . '/currency');
+        return $this->getConfigData('currency');
     }
     
     public function getRefundPassword()
     {
-        return Mage::getStoreConfig('payment/ewayau_direct/refund_password');
+        return $this->getConfigData('refund_password');
     }
 
     public function validate()
