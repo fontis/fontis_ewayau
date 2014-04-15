@@ -27,6 +27,7 @@ class Fontis_EwayAu_Model_Direct extends Mage_Payment_Model_Method_Cc
     protected $_canCapture              = true;
     protected $_canCapturePartial       = false;
     protected $_canRefund               = true;
+    protected $_canRefundInvoicePartial = true;
     protected $_canVoid                 = false;
     protected $_canUseInternal          = true;
     protected $_canUseCheckout          = true;
@@ -259,8 +260,14 @@ class Fontis_EwayAu_Model_Direct extends Mage_Payment_Model_Method_Cc
         $http = new Varien_Http_Adapter_Curl();
         $config = array('timeout' => 30);
 
+        $url = 'https://www.eway.com.au/gateway/xmlpaymentrefund.asp';
+
+        if ($this->getConfigData('test_gateway')) {
+            $url = 'https://www.eway.com.au/gateway/xmltest/refund_test.asp';
+        }
+
         $http->setConfig($config);
-        $http->write(Zend_Http_Client::POST, 'https://www.eway.com.au/gateway/xmlpaymentrefund.asp', '1.1', array(), $xml->asXML());
+        $http->write(Zend_Http_Client::POST, $url, '1.1', array(), $xml->asXML());
         $response = $http->read();
 
         $response = preg_split('/^\r?$/m', $response, 2);
