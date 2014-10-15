@@ -5,35 +5,36 @@
  * NOTICE OF LICENSE
  *
  * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
- * If you are unable to obtain it through the world-wide-web, please send
- * an email to license@magentocommerce.com so you can be sent a copy.
  *
-  * Original code copyright (c) 2008 Irubin Consulting Inc. DBA Varien
+ * Original code copyright (c) 2008 Irubin Consulting Inc. DBA Varien
  *
  * @category   Fontis
  * @package    Fontis_EwayAu
  * @author     Chris Norton
- * @copyright  Copyright (c) 2010 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @author     Matthew Gamble
+ * @copyright  Copyright (c) 2014 Fontis Pty. Ltd. (http://www.fontis.com.au)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Front_Action
 {
+    /**
+     * Redirect Block
+     *
+     * @var string
+     */
+    protected $_redirectBlockType;
+
     protected function _expireAjax()
     {
         if (!$this->getCheckout()->getQuote()->hasItems()) {
-            $this->getResponse()->setHeader('HTTP/1.1','403 Session Expired');
+            $this->getResponse()->setHeader('HTTP/1.1', '403 Session Expired');
             exit;
         }
     }
-
-    /**
-     * Redirect Block
-     * need to be redeclared
-     */
-    protected $_redirectBlockType;
 
     /**
      * Get singleton of Checkout Session Model
@@ -46,7 +47,7 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
     }
 
     /**
-     * when customer select eWay payment method
+     * When customer selects eWay payment method
      */
     public function redirectAction()
     {
@@ -54,6 +55,7 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
         $session->setEwayQuoteId($session->getQuoteId());
         $session->setEwayRealOrderId($session->getLastRealOrderId());
 
+        /** @var $order Mage_Sales_Model_Order */
         $order = Mage::getModel('sales/order');
         $order->loadByIncrementId($session->getLastRealOrderId());
         $order->addStatusToHistory($order->getStatus(), Mage::helper('ewayau')->__('Customer was redirected to eWAY.'));
@@ -72,7 +74,7 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
     /**
      * eWay returns POST variables to this action
      */
-    public function  successAction()
+    public function successAction()
     {
         $status = $this->_checkReturnedPost();
 
@@ -82,9 +84,10 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
         $session->setQuoteId($session->getEwayQuoteId(true));
         $session->getQuote()->setIsActive(false)->save();
 
+        /** @var $order Mage_Sales_Model_Order */
         $order = Mage::getModel('sales/order');
         $order->load($this->getCheckout()->getLastOrderId());
-        if($order->getId()) {
+        if ($order->getId()) {
             $order->sendNewOrderEmail();
         }
 
@@ -97,7 +100,6 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
 
     /**
      * Display failure page if error
-     *
      */
     public function failureAction()
     {
@@ -120,17 +122,20 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
     {
         if (!$this->getRequest()->isPost()) {
             $this->norouteAction();
-            return;
+            return false;
         }
+
         $status = true;
         $response = $this->getRequest()->getPost();
+        $checkout = $this->getCheckout();
 
-        if ($this->getCheckout()->getEwayRealOrderId() != $response['ewayTrxnNumber'] ||
-                $this->getCheckout()->getEwayRealOrderId() != Mage::helper('core')->decrypt($response['eWAYoption2'])) {
+        if ($checkout->getEwayRealOrderId() != $response['ewayTrxnNumber'] ||
+            $checkout->getEwayRealOrderId() != Mage::helper('core')->decrypt($response['eWAYoption2'])) {
             $this->norouteAction();
-            return;
+            return false;
         }
 
+        /** @var $order Mage_Sales_Model_Order */
         $order = Mage::getModel('sales/order');
         $order->loadByIncrementId($response['ewayTrxnNumber']);
 
@@ -138,7 +143,6 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
         $paymentInst->setResponse($response);
 
         if ($paymentInst->parseResponse()) {
-
             if ($order->canInvoice()) {
                 $invoice = $order->prepareInvoice();
                 $invoice->register()->capture();
@@ -157,12 +161,11 @@ abstract class Fontis_EwayAu_Controller_Abstract extends Mage_Core_Controller_Fr
             $order->cancel();
             $order->addStatusToHistory($order->getStatus(), Mage::helper('ewayau')->__('Customer was rejected by eWAY'));
             $status = false;
-            $this->getCheckout()->setEwayErrorMessage($response['eWAYresponseText']);
+            $checkout->setEwayErrorMessage($response['eWAYresponseText']);
         }
 
         $order->save();
 
         return $status;
     }
-
 }

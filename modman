@@ -2,10 +2,12 @@
 # see https://github.com/colinmollenhour/modman/ for more info
 
 # Fontis eWAY Australia
-src/app/code/community/Fontis/EwayAu                            app/code/community/Fontis/EwayAu
-src/app/etc/modules/Fontis_EwayAu.xml                           app/etc/modules/Fontis_EwayAu.xml
-src/app/design/adminhtml/default/default/template/fontis/ewayau	app/design/adminhtml/default/default/template/fontis/ewayau
-src/app/design/frontend/base/default/layout/fontis_ewayau.xml   app/design/frontend/base/default/layout/fontis_ewayau.xml
-src/app/design/frontend/base/default/template/fontis/ewayau     app/design/frontend/base/default/template/fontis/ewayau
-src/app/locale/en_AU/Fontis_EwayAu.csv                          app/locale/en_AU/Fontis_EwayAu.csv
-src/app/locale/en_US/Fontis_EwayAu.csv                          app/locale/en_US/Fontis_EwayAu.csv
+src/app/code/community/Fontis/EwayAu                                app/code/community/Fontis/EwayAu
+src/app/etc/modules/Fontis_EwayAu.xml                               app/etc/modules/Fontis_EwayAu.xml
+src/app/design/adminhtml/default/default/layout/fontis/ewayau.xml   app/design/adminhtml/default/default/layout/fontis/ewayau.xml
+src/app/design/adminhtml/default/default/template/fontis/ewayau     app/design/adminhtml/default/default/template/fontis/ewayau
+src/app/design/frontend/base/default/layout/fontis/ewayau.xml       app/design/frontend/base/default/layout/fontis/ewayau.xml
+src/app/design/frontend/base/default/template/fontis/ewayau         app/design/frontend/base/default/template/fontis/ewayau
+src/app/locale/en_AU/Fontis_EwayAu.csv                              app/locale/en_AU/Fontis_EwayAu.csv
+src/app/locale/en_US/Fontis_EwayAu.csv                              app/locale/en_US/Fontis_EwayAu.csv
+src/skin/adminhtml/default/default/fontis/ewayau                    skin/adminhtml/default/default/fontis/ewayau

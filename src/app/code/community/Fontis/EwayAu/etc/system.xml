@@ -6,15 +6,15 @@
  * NOTICE OF LICENSE
  *
  * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
- * If you are unable to obtain it through the world-wide-web, please send
- * an email to license@magentocommerce.com so you can be sent a copy.
  *
  * @category   Fontis
  * @package    Fontis_EwayAu
  * @author     Chris Norton
- * @copyright  Copyright (c) 2010 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @author     Matthew Gamble
+ * @copyright  Copyright (c) 2014 Fontis Pty. Ltd. (http://www.fontis.com.au)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 -->
@@ -28,7 +28,7 @@
                     <sort_order>201</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <active translate="label">
                             <label>Enabled</label>
@@ -37,7 +37,7 @@
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </active>
                         <title translate="label">
                             <label>Title</label>
@@ -45,7 +45,7 @@
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </title>
                         <customer_id translate="label">
                             <label>Customer ID</label>
@@ -54,7 +54,7 @@
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </customer_id>
                         <refund_password translate="label">
                             <label>Refund Password</label>
@@ -63,7 +63,7 @@
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </refund_password>
                         <currency translate="label">
                             <label>Accepted currency</label>
@@ -72,17 +72,26 @@
                             <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </currency>
                         <test_gateway translate="label">
                             <label>Use test gateway</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>71</sort_order>
+                            <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </test_gateway>
+                        <payment_action translate="label">
+                            <label>Payment Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ewayau/source_paymentAction</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payment_action>
                         <order_status translate="label">
                             <label>New order status</label>
                             <frontend_type>select</frontend_type>
@@ -90,7 +99,7 @@
                             <sort_order>80</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </order_status>
                         <cctypes translate="label">
                             <label>Credit Card Types</label>
@@ -99,7 +108,7 @@
                             <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </cctypes>
                         <useccv translate="label">
                             <label>Credit Card Verification</label>
@@ -108,7 +117,7 @@
                             <sort_order>100</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </useccv>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
@@ -122,7 +131,7 @@
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>111</sort_order>
+                            <sort_order>120</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -131,10 +140,10 @@
                         <sort_order translate="label">
                             <label>Sort order</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>112</sort_order>
+                            <sort_order>130</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </sort_order>
                     </fields>
                 </ewayau_direct>
@@ -144,64 +153,64 @@
                     <sort_order>202</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <active translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>1</sort_order>
+                            <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </active>
                         <title translate="label">
                             <label>Title</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>2</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </title>
                         <customer_id translate="label">
                             <label>Customer ID</label>
                             <frontend_type>text</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
-                            <sort_order>3</sort_order>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </customer_id>
                         <currency translate="label">
                             <label>Accepted currency</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_currency</source_model>
-                            <sort_order>4</sort_order>
+                            <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </currency>
                         <api_url translate="label">
                             <label>API Gateway URL</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>5</sort_order>
+                            <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </api_url>
                         <order_status translate="label">
                             <label>New order status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status_processing</source_model>
-                            <sort_order>7</sort_order>
+                            <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </order_status>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
                             <frontend_type>allowspecific</frontend_type>
-                            <sort_order>8</sort_order>
+                            <sort_order>70</sort_order>
                             <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -210,7 +219,7 @@
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>9</sort_order>
+                            <sort_order>80</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -219,10 +228,10 @@
                         <sort_order translate="label">
                             <label>Sort order</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>10</sort_order>
+                            <sort_order>100</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </sort_order>
                    </fields>
                 </ewayau_shared>
@@ -232,64 +241,64 @@
                     <sort_order>203</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <active translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>1</sort_order>
+                            <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </active>
                         <title translate="label">
                             <label>Title</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>2</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </title>
                         <customer_id translate="label">
                             <label>Customer ID</label>
                             <frontend_type>text</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
-                            <sort_order>3</sort_order>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </customer_id>
                         <currency translate="label">
                             <label>Accepted currency</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_currency</source_model>
-                            <sort_order>4</sort_order>
+                            <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </currency>
                         <api_url translate="label">
                             <label>API Gateway URL</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>5</sort_order>
+                            <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </api_url>
                         <order_status translate="label">
                             <label>New order status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status_processing</source_model>
-                            <sort_order>7</sort_order>
+                            <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </order_status>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
                             <frontend_type>allowspecific</frontend_type>
-                            <sort_order>8</sort_order>
+                            <sort_order>70</sort_order>
                             <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -298,7 +307,7 @@
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>9</sort_order>
+                            <sort_order>80</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -307,13 +316,167 @@
                         <sort_order translate="label">
                             <label>Sort order</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>10</sort_order>
+                            <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </sort_order>
                    </fields>
                 </ewayau_secure>
+                <ewayau_token translate="label" module="ewayau">
+                    <label>eWAY AU Token</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>204</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <show_in_checkout translate="label">
+                            <label>Display Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Display payment method as an option on the checkout page.</comment>
+                        </show_in_checkout>
+                        <customer_id translate="label">
+                            <label>Customer ID</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_id>
+                        <username translate="label">
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Your username which is used to login to MYeWAY Business Center.</comment>
+                        </username>
+                        <password translate="label">
+                            <label>Password</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Your eWAY API Password.</comment>
+                        </password>
+                        <test_login>
+                            <frontend_model>ewayau/system_config_test_login_token</frontend_model>
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </test_login>
+                        <currency translate="label">
+                            <label>Accepted currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_currency</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </currency>
+                        <test_gateway translate="label">
+                            <label>Use test gateway</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </test_gateway>
+                        <debug translate="label">
+                            <label>Debug model</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debug>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status>
+                        <cctypes translate="label">
+                            <label>Credit Card Types</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>ewayau/source_cctype</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cctypes>
+                        <!-- @todo implement ccv payment option -->
+                        <!--useccv translate="label">
+                            <label>Credit Card Verification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </useccv-->
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>130</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>140</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificcountry>
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                    </fields>
+                </ewayau_token>
             </groups>
         </payment>
     </sections>

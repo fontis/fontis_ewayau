@@ -1,0 +1,55 @@
+<?php
+/**
+ * Fontis eWAY Australia Extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   Fontis
+ * @package    Fontis_EwayAu
+ * @author     Chris Norton
+ * @author     Matthew Gamble
+ * @author     Ron Carr
+ * @copyright  Copyright (c) 2014 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php /** @var $this Fontis_Ewayau_Block_System_Config_Test_Login */ ?>
+<?php // This template will need further generalisation before it could be used by all eWay methods. ?>
+<?php $fieldPrefix = 'payment_ewayau_' . $this->getMethod(); ?>
+
+<button onclick="javascript:testLogin();" type="button" id="<?php echo $fieldPrefix; ?>_test_login_button">
+    <span><?php echo $this->__("Test Login"); ?></span>
+</button>
+<span id="<?php echo $fieldPrefix; ?>_test_login_result" class="test_result_icon"></span>
+
+<script type="text/javascript">
+    var $testResult = $('<?php echo $fieldPrefix; ?>_test_login_result');
+    function testLogin() {
+        var data = {
+            customer_id: $('<?php echo $fieldPrefix; ?>_customer_id').value,
+            username: $('<?php echo $fieldPrefix; ?>_username').value,
+            password: $('<?php echo $fieldPrefix; ?>_password').value,
+            test_gateway: $('<?php echo $fieldPrefix; ?>_test_gateway').value
+        };
+
+        new Ajax.Request('<?php echo $this->getTestUrl(); ?>', {
+            parameters: data,
+            onSuccess: function(response) {
+                response = response.responseText;
+                if (response == 1) {
+                    $testResult.addClassName('success');
+                    $testResult.removeClassName('failure');
+                } else {
+                    $testResult.addClassName('failure');
+                    $testResult.removeClassName('success');
+                }
+            }
+        });
+        return false;
+    }
+</script>

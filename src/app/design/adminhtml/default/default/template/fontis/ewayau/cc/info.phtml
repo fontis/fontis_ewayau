@@ -1,0 +1,30 @@
+<?php
+/**
+ * Fontis eWAY Australia Extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   Fontis
+ * @package    Fontis_EwayAu
+ * @author     Chris Norton
+ * @author     Matthew Gamble
+ * @author     Ron Carr
+ * @copyright  Copyright (c) 2014 Fontis Pty. Ltd. (http://www.fontis.com.au)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+/** @var $paymentHelper Mage_Payment_Helper_Data */
+$paymentHelper = Mage::helper('payment');
+$info = $this->getInfo();
+
+echo $paymentHelper->__('Name on the Card: %s', $this->escapeHtml($info->getCcOwner())) . '<br/>';
+echo $paymentHelper->__('Credit Card Type: %s', $this->escapeHtml($this->getCcTypeName())) . '<br/>';
+echo $paymentHelper->__('Credit Card Number: xxxx-%s', $this->escapeHtml($info->getCcLast4())) . '<br/>';
+echo $paymentHelper->__('Expiration Date: %s/%s', $this->escapeHtml($this->getCcExpMonth()), $this->escapeHtml($info->getCcExpYear()));
+?>

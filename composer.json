@@ -2,7 +2,7 @@
     "name":"fontis/eway",
     "type":"magento-module",
     "license":"Open Software License (OSL 3.0)",
-    "description":"This extension uses the eWAY Australia payment gateway for credit card processing..",
+    "description":"This extension uses the eWAY Australia payment gateway for credit card processing.",
     "homepage":"http://www.fontis.com.au",
     "authors":[
         {
@@ -53,6 +53,11 @@
                     "type":"magelocale",
                     "structure":"file",
                     "path":"en_US/Fontis_EwayAu.csv"
+                },
+                {
+                    "type":"mageskin",
+                    "structure":"dir",
+                    "path":"adminhtml/default/default/fontis/ewayau"
                 }
             ]
         }
